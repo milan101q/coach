@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   className: customClassName = '',
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4';
 
   const sizeStyles = {
     md: 'px-6 py-2 text-base',

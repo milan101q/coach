@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button.tsx';
 
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#services', label: 'Services' },
+  { href: '#inspiration', label: 'Inspiration' },
+  { href: '#contact', label: 'Contact' },
+];
+
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
+  // Effect for header background on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -12,6 +21,34 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Effect for scroll-spy active link
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      let currentSection = '';
+      // Iterate backwards to find the last section that has passed the top of the viewport
+      for (let i = navLinks.length - 1; i >= 0; i--) {
+        const link = navLinks[i];
+        const element = document.getElementById(link.href.substring(1));
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // 150px offset to account for header height and provide a buffer
+          if (rect.top <= 150) {
+            currentSection = link.href;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScrollSpy);
+    handleScrollSpy(); // Call on mount to set initial state
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollSpy);
     };
   }, []);
 
@@ -25,13 +62,6 @@ const Header: React.FC = () => {
       targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#services', label: 'Services' },
-    { href: '#inspiration', label: 'Inspiration' },
-    { href: '#contact', label: 'Contact' },
-  ];
   
   const handleMobileLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     handleNavClick(event);
@@ -46,7 +76,21 @@ const Header: React.FC = () => {
         </a>
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={handleNavClick} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
+             <a
+                key={link.href}
+                href={link.href}
+                onClick={handleNavClick}
+                className={`relative group text-gray-600 transition-colors duration-300 py-1 ${
+                  activeSection === link.href ? 'text-teal-700' : 'hover:text-teal-700'
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute bottom-0 left-0 block h-0.5 bg-teal-600 w-full transform transition-transform duration-300 origin-left ${
+                    activeSection === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
+              </a>
           ))}
         </nav>
         <div className="hidden md:block">
@@ -64,7 +108,16 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="flex flex-col items-center space-y-4 py-4">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={handleMobileLinkClick} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
+              <a 
+                key={link.href} 
+                href={link.href} 
+                onClick={handleMobileLinkClick} 
+                className={`transition-colors duration-300 ${
+                  activeSection === link.href ? 'text-teal-700 font-bold' : 'text-gray-600 hover:text-teal-700'
+                }`}
+              >
+                {link.label}
+              </a>
             ))}
             <Button href="#contact" onClick={() => setIsMenuOpen(false)}>Book a Session</Button>
           </div>
