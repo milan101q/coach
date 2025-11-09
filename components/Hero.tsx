@@ -1,15 +1,30 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './ui/Button.tsx';
 
 const Hero: React.FC = () => {
+  const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => setOffsetY(window.pageYOffset);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section 
       id="home" 
-      className="relative h-screen flex items-center justify-center text-center text-white bg-cover bg-center"
-      style={{ backgroundImage: "url('https://picsum.photos/1920/1080?grayscale&blur=2')" }}
+      className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden"
     >
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ 
+          backgroundImage: "url('https://picsum.photos/seed/awakening/1920/1080')",
+          transform: `translateY(${offsetY * 0.5}px)`
+        }}
+      ></div>
+      <div className="absolute inset-0 bg-black/30"></div>
       <div className="relative z-10 px-6 max-w-3xl">
         <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-4 animate-fade-in-down">
           Unlock Your Potential. Design Your Future.

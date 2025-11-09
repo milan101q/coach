@@ -10,6 +10,7 @@ import DailyInspiration from './components/DailyInspiration.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
 import Footer from './components/Footer.tsx';
+import BackToTopButton from './components/ui/BackToTopButton.tsx';
 
 const App: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };

@@ -20,8 +20,9 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   disabled = false,
   className: customClassName = '',
+  ...props
 }) => {
-  const baseStyles = 'inline-block font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4';
 
   const sizeStyles = {
     md: 'px-6 py-2 text-base',
@@ -37,29 +38,35 @@ const Button: React.FC<ButtonProps> = ({
 
   const className = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${disabled ? disabledStyles : ''} ${customClassName}`;
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (href && href.startsWith('#')) {
-        event.preventDefault();
-        const targetElement = document.querySelector(href);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-    if (onClick) {
-      onClick(event);
-    }
-  };
-
   if (href) {
+    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      // Handle smooth scroll for internal links
+      if (href.startsWith('#')) {
+        event.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+          });
+        }
+      }
+      
+      // Call user-provided onClick if it exists
+      if (onClick) {
+        onClick(event);
+      }
+    };
+
     return (
-      <a href={href} className={className.trim()} onClick={handleClick}>
+      <a href={href} className={className.trim()} onClick={handleLinkClick} {...props}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type={type} onClick={handleClick} className={className.trim()} disabled={disabled}>
+    <button type={type} onClick={onClick} className={className.trim()} disabled={disabled} {...props}>
       {children}
     </button>
   );
