@@ -1,17 +1,17 @@
 
 
 import * as React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Process from './components/Process';
-import Testimonials from './components/Testimonials';
-import DailyInspiration from './components/DailyInspiration';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import BackToTopButton from './components/ui/BackToTopButton';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import About from './components/About.tsx';
+import Services from './components/Services.tsx';
+import Process from './components/Process.tsx';
+import Testimonials from './components/Testimonials.tsx';
+import DailyInspiration from './components/DailyInspiration.tsx';
+import FAQ from './components/FAQ.tsx';
+import Contact from './components/Contact.tsx';
+import Footer from './components/Footer.tsx';
+import BackToTopButton from './components/ui/BackToTopButton.tsx';
 
 const App: React.FC = () => {
   return (

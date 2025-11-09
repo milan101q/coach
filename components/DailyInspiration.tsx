@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { generateInspiration } from '../services/geminiService';
-import Button from './ui/Button';
-import Card from './ui/Card';
+import { generateInspiration } from '../services/geminiService.ts';
+import Button from './ui/Button.tsx';
+import Card from './ui/Card.tsx';
 
 const ShareIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -9,11 +9,25 @@ const ShareIcon: React.FC = () => (
     </svg>
 );
 
+const CopyIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2V8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+);
+
+const CheckIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+);
+
+
 const DailyInspiration: React.FC = () => {
   const [inspiration, setInspiration] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFading, setIsFading] = React.useState(true); // Used for animation
   const [canShare, setCanShare] = React.useState(false);
+  const [isCopied, setIsCopied] = React.useState(false);
 
   React.useEffect(() => {
     if (navigator.share) {
@@ -66,6 +80,18 @@ const DailyInspiration: React.FC = () => {
     }
   };
 
+  const handleCopy = async () => {
+    if (inspiration) {
+        try {
+            await navigator.clipboard.writeText(`"${inspiration}"`);
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2500); // Reset after 2.5 seconds
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    }
+  };
+
 
   const isButtonDisabled = isFading || isLoading;
 
@@ -98,6 +124,17 @@ const DailyInspiration: React.FC = () => {
                 >
                     <ShareIcon />
                     <span>Share</span>
+                </Button>
+            )}
+            {!isLoading && (
+                 <Button 
+                    onClick={handleCopy} 
+                    disabled={isButtonDisabled} 
+                    variant="secondary"
+                    aria-label="Copy this quote to clipboard"
+                >
+                    {isCopied ? <CheckIcon /> : <CopyIcon />}
+                    <span>{isCopied ? 'Copied!' : 'Copy'}</span>
                 </Button>
             )}
         </div>

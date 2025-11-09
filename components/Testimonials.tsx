@@ -1,8 +1,8 @@
 
 
 import * as React from 'react';
-import type { Testimonial } from '../types';
-import Card from './ui/Card';
+import type { Testimonial } from '../types.ts';
+import Card from './ui/Card.tsx';
 
 const testimonialsData: Testimonial[] = [
   {

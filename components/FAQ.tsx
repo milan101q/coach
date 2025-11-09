@@ -1,7 +1,7 @@
 
 
 import * as React from 'react';
-import type { FaqItem } from '../types';
+import type { FaqItem } from '../types.ts';
 
 const faqData: FaqItem[] = [
   {

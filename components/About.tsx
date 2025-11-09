@@ -2,7 +2,7 @@
 
 
 import * as React from 'react';
-import Button from './ui/Button';
+import Button from './ui/Button.tsx';
 
 const About: React.FC = () => {
   const titleRef = React.useRef<HTMLHeadingElement>(null);

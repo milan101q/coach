@@ -1,8 +1,8 @@
 
 
 import * as React from 'react';
-import type { Service } from '../types';
-import Card from './ui/Card';
+import type { Service } from '../types.ts';
+import Card from './ui/Card.tsx';
 
 // Icon for "Clarity Session" - Person balancing on a rope
 const BalanceIcon = () => (
