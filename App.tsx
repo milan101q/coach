@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import Header from './components/Header.tsx';
 import Hero from './components/Hero.tsx';
@@ -12,6 +10,7 @@ import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
 import Footer from './components/Footer.tsx';
 import BackToTopButton from './components/ui/BackToTopButton.tsx';
+import AnimatedSection from './components/ui/AnimatedSection.tsx';
 
 const App: React.FC = () => {
   return (
@@ -19,13 +18,27 @@ const App: React.FC = () => {
       <Header />
       <main>
         <Hero />
-        <About />
-        <Services />
-        <Process />
-        <Testimonials />
-        <DailyInspiration />
-        <FAQ />
-        <Contact />
+        <AnimatedSection>
+          <About />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Services />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Process />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Testimonials />
+        </AnimatedSection>
+        <AnimatedSection>
+          <DailyInspiration />
+        </AnimatedSection>
+        <AnimatedSection>
+          <FAQ />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Contact />
+        </AnimatedSection>
       </main>
       <Footer />
       <BackToTopButton />

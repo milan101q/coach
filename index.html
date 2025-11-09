@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <!--
-      FIX: Added a <base> tag to correctly resolve asset paths for deployment in a subdirectory.
-      This ensures the browser looks for files inside the /coach/ folder on GitHub Pages.
+      Set the base URL for all relative paths in the document.
+      This helps resolve paths correctly when deploying to a subdirectory like /coach/ on GitHub Pages.
     -->
     <base href="/coach/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,10 +71,11 @@
     </script>
     <div id="root"></div>
     <!-- 
-      FIX: Corrected script path to be explicitly relative ('./index.tsx').
-      This ensures the browser correctly resolves the path within the GitHub Pages
-      subdirectory, fixing the 404 error that caused a blank page.
+      FIX: Set an absolute path for the main script ('/coach/index.tsx').
+      This is the definitive fix for the 404 error when deploying to a GitHub Pages
+      subdirectory, as it tells the browser the exact location of the file,
+      bypassing issues with relative path or base tag resolution.
     -->
-    <script type="text/babel" data-type="module" data-presets="react,typescript" src="./index.tsx"></script>
+    <script type="text/babel" data-type="module" data-presets="react,typescript" src="/coach/index.tsx"></script>
   </body>
 </html>

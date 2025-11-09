@@ -1,55 +1,9 @@
-
-
-
 import * as React from 'react';
 import Button from './ui/Button.tsx';
 
 const About: React.FC = () => {
-  const titleRef = React.useRef<HTMLHeadingElement>(null);
-  const [isTitleVisible, setIsTitleVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // When the element is in view, update the state
-        if (entry.isIntersecting) {
-          setIsTitleVisible(true);
-          // Stop observing once it's visible to prevent re-triggering
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of the element is visible
-      }
-    );
-
-    const currentTitleRef = titleRef.current;
-    if (currentTitleRef) {
-      observer.observe(currentTitleRef);
-    }
-
-    // Cleanup observer on component unmount
-    return () => {
-      if (currentTitleRef) {
-        observer.unobserve(currentTitleRef);
-      }
-    };
-  }, []);
-
   return (
     <section id="about" className="py-20 bg-white overflow-x-hidden">
-      {/* Component-specific styles for the fade-in animation */}
-      <style>{`
-        .fade-in-on-scroll {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-on-scroll.is-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="flex flex-col items-center md:items-start">
@@ -66,8 +20,7 @@ const About: React.FC = () => {
           </div>
           <div className="text-left">
             <h2 
-              ref={titleRef}
-              className={`text-4xl font-bold font-serif text-teal-800 mb-6 fade-in-on-scroll ${isTitleVisible ? 'is-visible' : ''}`}
+              className="text-4xl font-bold font-serif text-teal-800 mb-6"
             >
               Meet Your Coach, Hibba
             </h2>
