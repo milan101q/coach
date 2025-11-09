@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button.tsx';
 
@@ -38,7 +39,8 @@ const Hero: React.FC = () => {
           </Button>
         </div>
       </div>
-       <style jsx>{`
+       {/* FIX: Removed the non-standard `jsx` prop from the `<style>` tag to resolve a TypeScript error, as this project does not appear to use the `styled-jsx` library. */}
+       <style>{`
         @keyframes fade-in-down {
             0% {
                 opacity: 0;
