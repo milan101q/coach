@@ -2,6 +2,11 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      FIX: Added a <base> tag to correctly resolve asset paths for deployment in a subdirectory.
+      This ensures the browser looks for files inside the /coach/ folder on GitHub Pages.
+    -->
+    <base href="/coach/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clarity & Courage Life Coaching | Unlock Your Potential</title>
 
