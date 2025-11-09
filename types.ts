@@ -1,5 +1,5 @@
 // Fix: Use React.JSX.Element to avoid relying on a global JSX namespace and resolve potential type conflicts.
-import React from 'react';
+import * as React from 'react';
 
 export interface Service {
   icon: React.JSX.Element;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import * as React from 'react';
 import { generateInspiration } from '../services/geminiService';
 import Button from './ui/Button';
 import Card from './ui/Card';
@@ -10,18 +10,18 @@ const ShareIcon: React.FC = () => (
 );
 
 const DailyInspiration: React.FC = () => {
-  const [inspiration, setInspiration] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFading, setIsFading] = useState(true); // Used for animation
-  const [canShare, setCanShare] = useState(false);
+  const [inspiration, setInspiration] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isFading, setIsFading] = React.useState(true); // Used for animation
+  const [canShare, setCanShare] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (navigator.share) {
       setCanShare(true);
     }
   }, []);
 
-  const fetchInspiration = useCallback(async (isInitial = false) => {
+  const fetchInspiration = React.useCallback(async (isInitial = false) => {
     // 1. Fade out the current quote if it's not the first load
     if (!isInitial) {
       setIsFading(true);
@@ -38,13 +38,13 @@ const DailyInspiration: React.FC = () => {
   }, []);
 
   // Effect for the initial load
-  useEffect(() => {
+  React.useEffect(() => {
     fetchInspiration(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Effect to trigger fade-in after a new quote is loaded
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isLoading) {
       // Use a short timeout to ensure the DOM has the new quote
       // before changing opacity, which triggers the CSS transition.

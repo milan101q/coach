@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const SocialIcon: React.FC<{ href: string; children: React.ReactNode; label: string }> = ({ href, children, label }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-teal-500 transition-colors duration-300" aria-label={label}>

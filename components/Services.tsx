@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import * as React from 'react';
 import type { Service } from '../types';
 import Card from './ui/Card';
 

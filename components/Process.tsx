@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import * as React from 'react';
 
 const ProcessStep = ({ number, title, description }: { number: string; title: string; description: string }) => (
   <div className="relative flex flex-col items-center text-center">

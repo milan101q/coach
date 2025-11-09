@@ -1,6 +1,6 @@
 // FIX: Replaced placeholder content with a standard React entrypoint to resolve parsing errors.
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
 import App from './App';
 
 // Assuming there's a root element with id 'root' in the HTML.

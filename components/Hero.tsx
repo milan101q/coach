@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import Button from './ui/Button';
 
 // Icon for the button
@@ -10,10 +10,10 @@ const ArrowRightIcon: React.FC = () => (
 
 
 const Hero: React.FC = () => {
-  const [offsetY, setOffsetY] = useState(0);
+  const [offsetY, setOffsetY] = React.useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);

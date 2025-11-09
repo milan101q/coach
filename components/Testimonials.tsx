@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+
+import * as React from 'react';
 import type { Testimonial } from '../types';
 import Card from './ui/Card';
 
@@ -25,9 +26,9 @@ const testimonialsData: Testimonial[] = [
 ];
 
 const Testimonials: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const timer = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsData.length);
         }, 5000); // Change slide every 5 seconds

@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+
+import * as React from 'react';
 import Button from './ui/Button';
 
 const navLinks = [
@@ -11,12 +12,12 @@ const navLinks = [
 ];
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState('');
 
   // Effect for header background on scroll
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -27,7 +28,7 @@ const Header: React.FC = () => {
   }, []);
 
   // Effect for scroll-spy active link
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScrollSpy = () => {
       let currentSection = '';
       // Iterate backwards to find the last section that has passed the top of the viewport

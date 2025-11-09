@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+
+import * as React from 'react';
 import type { FaqItem } from '../types';
 
 const faqData: FaqItem[] = [
@@ -42,7 +43,7 @@ const AccordionItem: React.FC<{ item: FaqItem, isOpen: boolean, onClick: () => v
 
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   const handleClick = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

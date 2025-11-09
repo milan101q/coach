@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 
 const BackToTopButton: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
 
   // Show button when page is scrolled down
   const toggleVisibility = () => {
@@ -13,7 +13,7 @@ const BackToTopButton: React.FC = () => {
   };
 
   // Set up event listeners
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('scroll', toggleVisibility);
 
     return () => {

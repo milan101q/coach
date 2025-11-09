@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import Button from './ui/Button';
 
 const Contact: React.FC = () => {
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

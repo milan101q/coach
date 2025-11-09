@@ -1,13 +1,14 @@
 
 
-import React, { useState, useEffect, useRef } from 'react';
+
+import * as React from 'react';
 import Button from './ui/Button';
 
 const About: React.FC = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const titleRef = React.useRef<HTMLHeadingElement>(null);
+  const [isTitleVisible, setIsTitleVisible] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         // When the element is in view, update the state
