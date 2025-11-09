@@ -36,6 +36,14 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
   <body>
+    <script>
+      // Polyfill process.env for browser environments where it's not defined.
+      // This prevents a crash when the Gemini API service is initialized,
+      // which was causing a blank page on deployment.
+      if (typeof process === 'undefined') {
+        window.process = { env: {} };
+      }
+    </script>
     <div id="root"></div>
     <!-- Correctly configure Babel to transpile React and TypeScript -->
     <script type="text/babel" data-presets="react,typescript" src="index.tsx"></script>
