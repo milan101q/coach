@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 type ButtonProps = {
@@ -39,13 +38,12 @@ const Button: React.FC<ButtonProps> = ({
   const className = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${disabled ? disabledStyles : ''} ${customClassName}`;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (href) {
-      event.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+    if (href && href.startsWith('#')) {
+        event.preventDefault();
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
     }
     if (onClick) {
       onClick(event);

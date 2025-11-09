@@ -20,7 +20,7 @@ const DailyInspiration: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-stone-100">
+    <section id="inspiration" className="py-20 bg-stone-100">
       <div className="container mx-auto px-6 text-center max-w-3xl">
         <h2 className="text-3xl font-bold font-serif text-teal-800 mb-4">A Moment of Inspiration</h2>
         <div className="min-h-[6rem] flex items-center justify-center p-6 bg-white rounded-lg shadow-md my-6">
