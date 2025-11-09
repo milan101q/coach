@@ -3,38 +3,45 @@ import React from 'react';
 import type { Service } from '../types';
 import Card from './ui/Card';
 
-const CompassIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+// Icon for "Clarity Session" - Person balancing on a rope
+const BalanceIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600 transition-transform duration-300 ease-in-out group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15.5L3 15.5" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 11.5L12 6" />
+    <circle cx="12" cy="4.5" r="1.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M10 14L12 11.5L14 14" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7 9L17 9" />
   </svg>
 );
 
-const RocketIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-    </svg>
+// Icon for "Transformation Program" - A growing plant/seedling
+const GrowthIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M12 21V9M12 9c-2-2.5-5-3-5-3s2.5 3 4 5M12 9c2-2.5 5-3 5-3s-2.5 3-4 5" />
+  </svg>
 );
 
-const UsersIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197m0 0A10.004 10.004 0 0012 10.5a10.004 10.004 0 003-1.649m-3 1.649V21" />
-    </svg>
+// Icon for "Group Coaching" - People collaborating
+const CommunityIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-600 transition-transform duration-300 ease-in-out group-hover:scale-105" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+  </svg>
 );
 
 
 const services: Service[] = [
   {
-    icon: <CompassIcon />,
+    icon: <BalanceIcon />,
     title: 'Clarity Session',
     description: 'A focused 90-minute session to untangle your thoughts, gain immediate clarity on a specific challenge, and define your next steps with confidence.',
   },
   {
-    icon: <RocketIcon />,
+    icon: <GrowthIcon />,
     title: 'Transformation Program',
     description: 'A comprehensive 3-month one-on-one coaching journey to redefine your goals, build powerful habits, and create lasting, meaningful change in your life.',
   },
   {
-    icon: <UsersIcon />,
+    icon: <CommunityIcon />,
     title: 'Group Coaching',
     description: 'Join a small, supportive community of like-minded individuals. A 6-week program to learn, grow, and achieve your goals together.',
   },

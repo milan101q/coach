@@ -1,5 +1,7 @@
 
+
 import React, { useState, useEffect, useRef } from 'react';
+import Button from './ui/Button';
 
 const About: React.FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -49,11 +51,18 @@ const About: React.FC = () => {
       `}</style>
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          <img 
-            src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=600&auto=format&fit=crop" 
-            alt="A person stands on a snowy mountain peak, looking out at a vast mountain range, symbolizing achievement and looking towards the future." 
-            className="rounded-lg shadow-xl object-cover w-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-          />
+          <div className="flex flex-col items-center md:items-start">
+            <img 
+              src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=600&auto=format&fit=crop" 
+              alt="A person stands on a snowy mountain peak, looking out at a vast mountain range, symbolizing achievement and looking towards the future." 
+              className="rounded-lg shadow-xl object-cover w-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            />
+            <div className="mt-8">
+              <Button href="#contact" size="lg">
+                Book Your Free Discovery Call
+              </Button>
+            </div>
+          </div>
           <div className="text-left">
             <h2 
               ref={titleRef}

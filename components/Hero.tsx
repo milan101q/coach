@@ -1,6 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button';
+
+// Icon for the button
+const ArrowRightIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 ease-in-out group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+);
+
 
 const Hero: React.FC = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -12,6 +19,15 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Enhance the parallax effect
+  // 1. Slow down the background movement slightly to increase the feeling of depth.
+  const parallaxSpeed = 0.4;
+  
+  // 2. Dynamically adjust the overlay darkness to add more visual interest on scroll.
+  // The opacity will go from 0.3 (30%) up to a max of 0.6 (60%).
+  const overlayOpacity = Math.min(0.6, 0.3 + offsetY / 1500);
+
+
   return (
     <section 
       id="home" 
@@ -21,10 +37,17 @@ const Hero: React.FC = () => {
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
           backgroundImage: "url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=1920&auto=format&fit=crop')",
-          transform: `translateY(${offsetY * 0.5}px)`
+          transform: `translateY(${offsetY * parallaxSpeed}px)`,
+          willChange: 'transform'
         }}
       ></div>
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div 
+        className="absolute inset-0 bg-black"
+        style={{ 
+          opacity: overlayOpacity,
+          willChange: 'opacity'
+        }}
+      ></div>
       <div className="relative z-10 px-6 max-w-3xl">
         <h1 
           className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-4 animate-fade-in-down"
@@ -42,8 +65,9 @@ const Hero: React.FC = () => {
           className="animate-fade-in-up"
           style={{ animationDelay: '0.8s' }}
         >
-          <Button href="#contact" size="lg" variant="secondary">
-            Begin Your Transformation
+          <Button href="#contact" size="lg" variant="secondary" className="group font-serif tracking-wider">
+            <span>Begin Your Transformation</span>
+            <ArrowRightIcon />
           </Button>
         </div>
       </div>

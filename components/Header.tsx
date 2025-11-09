@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button';
 
@@ -5,6 +6,7 @@ const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#services', label: 'Services' },
   { href: '#inspiration', label: 'Inspiration' },
+  { href: '#faq', label: 'FAQ' },
   { href: '#contact', label: 'Contact' },
 ];
 
@@ -97,32 +99,31 @@ const Header: React.FC = () => {
           <Button href="#contact">Book a Session</Button>
         </div>
         <div className="md:hidden">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu" aria-expanded={isMenuOpen}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-teal-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'} />
             </svg>
           </button>
         </div>
       </div>
-      {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <div className="flex flex-col items-center space-y-4 py-4">
-            {navLinks.map((link) => (
-              <a 
-                key={link.href} 
-                href={link.href} 
-                onClick={handleMobileLinkClick} 
-                className={`transition-colors duration-300 ${
-                  activeSection === link.href ? 'text-teal-700 font-bold' : 'text-gray-600 hover:text-teal-700'
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-            <Button href="#contact" onClick={() => setIsMenuOpen(false)}>Book a Session</Button>
-          </div>
+      {/* Mobile Menu with slide animation */}
+      <div className={`md:hidden bg-white shadow-lg overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="flex flex-col items-center space-y-4 py-4">
+          {navLinks.map((link) => (
+            <a 
+              key={link.href} 
+              href={link.href} 
+              onClick={handleMobileLinkClick} 
+              className={`transition-colors duration-300 ${
+                activeSection === link.href ? 'text-teal-700 font-bold' : 'text-gray-600 hover:text-teal-700'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+          <Button href="#contact" onClick={() => setIsMenuOpen(false)}>Book a Session</Button>
         </div>
-      )}
+      </div>
     </header>
   );
 };
