@@ -1,8 +1,9 @@
+
 import React from 'react';
 
 type ButtonProps = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   href?: string;
   variant?: 'primary' | 'secondary';
   size?: 'md' | 'lg';
@@ -37,16 +38,17 @@ const Button: React.FC<ButtonProps> = ({
 
   const className = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${disabled ? disabledStyles : ''} ${customClassName}`;
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (href && href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (href) {
+      event.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
     if (onClick) {
-      onClick();
+      onClick(event);
     }
   };
 

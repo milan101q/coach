@@ -3,7 +3,6 @@ import React from 'react';
 
 const ProcessStep = ({ number, title, description }: { number: string; title: string; description: string }) => (
   <div className="relative flex flex-col items-center text-center">
-    <div className="absolute top-6 left-1/2 w-px h-full bg-teal-200 hidden md:block group-last:hidden"></div>
     <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-teal-600 text-white font-bold text-xl mb-4">{number}</div>
     <h3 className="text-xl font-bold font-serif mb-2">{title}</h3>
     <p className="text-gray-600 px-4">{description}</p>

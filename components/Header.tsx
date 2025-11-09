@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Button from './ui/Button';
 
@@ -15,20 +16,22 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false); // Close mobile menu on any navigation click
+  };
+
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
     { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact' },
   ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const href = e.currentTarget.getAttribute('href');
-    if (href) {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 shadow-md backdrop-blur-sm' : 'bg-transparent'}`}>
@@ -38,7 +41,7 @@ const Header: React.FC = () => {
         </a>
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={handleNavClick} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
+            <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
           ))}
         </nav>
         <div className="hidden md:block">
@@ -56,7 +59,7 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="flex flex-col items-center space-y-4 py-4">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={(e) => { handleNavClick(e); setIsMenuOpen(false); }} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
+              <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-gray-600 hover:text-teal-700 transition-colors duration-300">{link.label}</a>
             ))}
             <Button href="#contact" onClick={() => setIsMenuOpen(false)}>Book a Session</Button>
           </div>

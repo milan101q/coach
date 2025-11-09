@@ -86,6 +86,18 @@ const Contact: React.FC = () => {
                                 disabled={status === 'loading'}
                             />
                         </div>
+                         <div>
+                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number <span className="text-xs text-gray-500">(Optional)</span></label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                                disabled={status === 'loading'}
+                                placeholder="(123) 456-7890"
+                                autoComplete="tel"
+                            />
+                        </div>
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700">Tell me a little about what you'd like to achieve</label>
                             <textarea
