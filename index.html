@@ -66,10 +66,10 @@
     </script>
     <div id="root"></div>
     <!-- 
-      FIX: Added data-type="module" to ensure Babel's output is a JS module.
-      This allows the browser to correctly use the importmap for dependencies 
-      like React, resolving the error that caused a blank page on deployment.
+      FIX: Corrected script path to be explicitly relative ('./index.tsx').
+      This ensures the browser correctly resolves the path within the GitHub Pages
+      subdirectory, fixing the 404 error that caused a blank page.
     -->
-    <script type="text/babel" data-type="module" data-presets="react,typescript" src="index.tsx"></script>
+    <script type="text/babel" data-type="module" data-presets="react,typescript" src="./index.tsx"></script>
   </body>
 </html>
