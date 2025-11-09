@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { Testimonial } from '../types.ts';
-import Card from './ui/Card.tsx';
+import type { Testimonial } from '../types';
+import Card from './ui/Card';
 
 const testimonialsData: Testimonial[] = [
   {

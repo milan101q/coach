@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './ui/Button.tsx';
+import Button from './ui/Button';
 
 const Contact: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');

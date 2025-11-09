@@ -1,7 +1,6 @@
 
-
 import React, { useState, useEffect } from 'react';
-import Button from './ui/Button.tsx';
+import Button from './ui/Button';
 
 const Hero: React.FC = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -21,52 +20,67 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('https://picsum.photos/seed/awakening/1920/1080')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=1920&auto=format&fit=crop')",
           transform: `translateY(${offsetY * 0.5}px)`
         }}
       ></div>
       <div className="absolute inset-0 bg-black/30"></div>
       <div className="relative z-10 px-6 max-w-3xl">
-        <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-4 animate-fade-in-down">
+        <h1 
+          className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-4 animate-fade-in-down"
+          style={{ animationDelay: '0.2s' }}
+        >
           Unlock Your Potential. Design Your Future.
         </h1>
-        <p className="text-lg md:text-xl mb-8 text-stone-200 animate-fade-in-up">
+        <p 
+          className="text-lg md:text-xl mb-8 text-stone-200 animate-fade-in-up"
+          style={{ animationDelay: '0.5s' }}
+        >
           I help you break through barriers, gain clarity, and build the life you've always envisioned.
         </p>
-        <div className="animate-fade-in-up animation-delay-300">
+        <div 
+          className="animate-fade-in-up"
+          style={{ animationDelay: '0.8s' }}
+        >
           <Button href="#contact" size="lg" variant="secondary">
             Begin Your Transformation
           </Button>
         </div>
       </div>
-       {/* FIX: Removed the non-standard `jsx` prop from the `<style>` tag to resolve a TypeScript error, as this project does not appear to use the `styled-jsx` library. */}
        <style>{`
         @keyframes fade-in-down {
-            0% {
+            from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         @keyframes fade-in-up {
-            0% {
+            from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+        /* Base styles for hero animations */
+        .animate-fade-in-down,
+        .animate-fade-in-up {
+            opacity: 0; /* Start hidden */
+            animation-duration: 0.8s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards; /* Stay at the final state */
+        }
         .animate-fade-in-down {
-            animation: fade-in-down 0.8s ease-out forwards;
+            animation-name: fade-in-down;
         }
         .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out 0.3s forwards;
-            opacity: 0;
+            animation-name: fade-in-up;
         }
       `}</style>
     </section>

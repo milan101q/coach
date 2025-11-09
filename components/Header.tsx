@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from './ui/Button.tsx';
+import Button from './ui/Button';
 
 const navLinks = [
   { href: '#about', label: 'About' },

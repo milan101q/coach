@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import type { FaqItem } from '../types.ts';
+import type { FaqItem } from '../types';
 
 const faqData: FaqItem[] = [
   {
