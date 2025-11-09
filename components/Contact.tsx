@@ -22,11 +22,10 @@ const Contact: React.FC = () => {
 
             if (response.ok) {
                 setStatus('success');
+                form.reset();
             } else {
                 const data = await response.json();
-                if (data.hasOwnProperty('error')) {
-                    console.error('FormSubmit error:', data.error);
-                }
+                console.error('Form submission failed:', data);
                 setStatus('error');
             }
         } catch (error) {
@@ -57,13 +56,13 @@ const Contact: React.FC = () => {
             default:
                 return (
                     <form 
-                        action="https://formsubmit.co/miladrk111@gmail.com" 
+                        action="https://api.web3forms.com/submit" 
                         method="POST" 
                         onSubmit={handleSubmit}
                         className="space-y-6 bg-white p-8 rounded-lg shadow-lg"
                     >
-                        <input type="hidden" name="_subject" value="New Inquiry from Clarity & Courage Website" />
-                        <input type="hidden" name="_captcha" value="false" />
+                        <input type="hidden" name="access_key" value="87774ba7-dcf7-411b-9e40-5e0a81ae5151" />
+                        <input type="hidden" name="subject" value="New Inquiry from Clarity & Courage Website" />
 
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
