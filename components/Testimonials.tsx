@@ -1,24 +1,25 @@
 
 
+
 import * as React from 'react';
 import type { Testimonial } from '../types.ts';
 import Card from './ui/Card.tsx';
 
 const testimonialsData: Testimonial[] = [
   {
-    quote: "Working with Jane was life-changing. I went from feeling lost and overwhelmed to having a clear vision for my future and the confidence to pursue it. I can't recommend her enough!",
+    quote: "Working with Hibba was life-changing. I went from feeling lost and overwhelmed to having a clear vision for my future and the confidence to pursue it. I can't recommend her enough!",
     name: 'Sarah L.',
     title: 'Marketing Director',
     imageUrl: 'https://picsum.photos/id/237/100/100',
   },
   {
-    quote: "I was skeptical about life coaching, but Jane's practical and empathetic approach completely won me over. I've achieved more in the last three months than I did in the previous three years.",
+    quote: "I was skeptical about life coaching, but Hibba's practical and empathetic approach completely won me over. I've achieved more in the last three months than I did in the previous three years.",
     name: 'Michael B.',
     title: 'Software Engineer',
     imageUrl: 'https://picsum.photos/id/238/100/100',
   },
   {
-    quote: 'The group coaching program was incredible. It provided a safe and supportive space to grow alongside others. Jane is a masterful facilitator who brings out the best in everyone.',
+    quote: 'The group coaching program was incredible. It provided a safe and supportive space to grow alongside others. Hibba is a masterful facilitator who brings out the best in everyone.',
     name: 'Emily C.',
     title: 'Entrepreneur',
     imageUrl: 'https://picsum.photos/id/239/100/100',
