@@ -64,7 +64,11 @@
       }
     </script>
     <div id="root"></div>
-    <!-- Correctly configure Babel to transpile React and TypeScript -->
-    <script type="text/babel" data-presets="react,typescript" src="index.tsx"></script>
+    <!-- 
+      FIX: Added data-type="module" to ensure Babel's output is a JS module.
+      This allows the browser to correctly use the importmap for dependencies 
+      like React, resolving the error that caused a blank page on deployment.
+    -->
+    <script type="text/babel" data-type="module" data-presets="react,typescript" src="index.tsx"></script>
   </body>
 </html>
