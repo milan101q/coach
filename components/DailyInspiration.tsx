@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { generateInspiration } from '../services/geminiService';
-import Button from './ui/Button';
+import { generateInspiration } from '../services/geminiService.ts';
+import Button from './ui/Button.tsx';
 
 const DailyInspiration: React.FC = () => {
   const [inspiration, setInspiration] = useState('');

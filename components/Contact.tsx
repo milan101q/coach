@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './ui/Button';
+import Button from './ui/Button.tsx';
 
 const Contact: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
                                 id="name"
                                 name="name"
                                 required
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/50"
                                 disabled={status === 'loading'}
                             />
                         </div>
@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
                                 id="email"
                                 name="email"
                                 required
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/50"
                                 disabled={status === 'loading'}
                             />
                         </div>
@@ -92,7 +92,7 @@ const Contact: React.FC = () => {
                                 type="tel"
                                 id="phone"
                                 name="phone"
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/50"
                                 disabled={status === 'loading'}
                                 placeholder="(123) 456-7890"
                                 autoComplete="tel"
@@ -105,7 +105,7 @@ const Contact: React.FC = () => {
                                 name="message"
                                 rows={4}
                                 required
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/50"
                                 disabled={status === 'loading'}
                             ></textarea>
                         </div>
