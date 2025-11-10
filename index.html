@@ -728,36 +728,36 @@
         );
     };
 
+    const FloatingLabelInput = ({ id, name, type = 'text', label, value, onChange, icon, required, disabled }) => {
+        const InputComponent = type === 'textarea' ? 'textarea' : 'input';
+        return (
+            <div className={`relative floating-label-input ${value ? 'has-value' : ''}`}>
+                <span className={`absolute left-3 text-gray-400 ${type === 'textarea' ? 'top-4' : 'top-1/2 -translate-y-1/2'}`}>{icon}</span>
+                <InputComponent
+                    id={id}
+                    name={name}
+                    type={type}
+                    value={value}
+                    onChange={onChange}
+                    required={required}
+                    disabled={disabled}
+                    placeholder=" " 
+                    rows={type === 'textarea' ? 4 : undefined}
+                    className="block w-full text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none pt-4 pb-1 pl-10 focus:outline-none focus:ring-0 focus:border-teal-600 transition-colors"
+                />
+                <label
+                    htmlFor={id}
+                    className="absolute left-10 top-4 text-gray-500 duration-300 transform origin-[0] pointer-events-none"
+                >
+                    {label}
+                </label>
+            </div>
+        );
+    };
+
     const Contact = () => {
         const [status, setStatus] = React.useState('idle');
         const [formValues, setFormValues] = React.useState({ name: '', email: '', phone: '', message: '' });
-
-        const FloatingLabelInput = ({ id, name, type = 'text', label, value, onChange, icon, required, disabled }) => {
-            const InputComponent = type === 'textarea' ? 'textarea' : 'input';
-            return (
-                <div className={`relative floating-label-input ${value ? 'has-value' : ''}`}>
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">{icon}</span>
-                    <InputComponent
-                        id={id}
-                        name={name}
-                        type={type}
-                        value={value}
-                        onChange={onChange}
-                        required={required}
-                        disabled={disabled}
-                        placeholder=" " 
-                        rows={type === 'textarea' ? 4 : undefined}
-                        className="block w-full text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none pt-4 pb-1 pl-10 focus:outline-none focus:ring-0 focus:border-teal-600 transition-colors"
-                    />
-                    <label
-                        htmlFor={id}
-                        className="absolute left-10 top-4 text-gray-500 duration-300 transform origin-[0] pointer-events-none"
-                    >
-                        {label}
-                    </label>
-                </div>
-            );
-        };
 
         const handleInputChange = (e) => {
             const { name, value } = e.target;
