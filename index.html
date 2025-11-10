@@ -41,44 +41,47 @@
         font-family: 'Playfair Display', serif;
       }
     </style>
-  <script type="importmap">
+
+    <!-- 1. Load React and ReactDOM as global variables (UMD scripts) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 2. Set up an import map for the one ES module we will load dynamically -->
+    <script type="importmap">
 {
   "imports": {
-    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0"
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
 }
 </script>
-<!-- Add Babel for in-browser JSX/TSX transformation -->
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- 3. Add Babel for in-browser JSX/TSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
   <body>
     <script>
       // Polyfill process.env for browser environments where it's not defined.
-      // This prevents a crash when the Gemini API service is initialized,
-      // which was causing a blank page on deployment.
       if (typeof process === 'undefined') {
         window.process = { env: {} };
       }
     </script>
     <div id="root"></div>
-    <script type="text/babel" data-presets="react,typescript" data-type="module">
-import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
 
+    <!-- 4. The main application script -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module">
 // --- CONSOLIDATED APP CODE ---
-// This single script contains all the application logic, components, and services,
-// transpiled in the browser by Babel. This approach eliminates the need for a build step
-// and resolves module loading issues on static hosting platforms like GitHub Pages.
+// React and ReactDOM are now globally available from the scripts in the <head>.
+// We do not need to import them here. Babel will find them automatically.
 
 const { useState, useEffect, useCallback, useRef, StrictMode } = React;
-const { createRoot } = ReactDOM;
 
 // --- From services/geminiService.ts ---
 const getAiClient = async () => {
+  // This dynamic import works because the script is data-type="module"
+  // and we have an import map pointing to the @google/genai library.
   const { GoogleGenAI } = await import('@google/genai');
   return new GoogleGenAI({ apiKey: process.env.API_KEY });
 };
@@ -114,7 +117,7 @@ const generateInspiration = async () => {
     return text;
 
   } catch (error) {
-    console.error("Error generating inspiration:", error);
+    // Silently catch the error and return a fallback quote.
     return getRandomFallback();
   }
 };
@@ -809,9 +812,6 @@ const DailyInspiration = () => {
                 <span>{isCopied ? 'Copied!' : 'Copy'}</span>
             </Button>
         </div>
-        <p className="text-xs text-gray-500 mt-4">
-            New inspirations powered by Google Gemini.
-        </p>
       </div>
     </section>
   );
@@ -1064,11 +1064,13 @@ const App = () => {
 // --- From index.tsx (entry point logic) ---
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  const root = createRoot(rootElement);
+  // Use the global ReactDOM object to create the root.
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <StrictMode>
+    // Use the global React object for StrictMode.
+    <React.StrictMode>
       <App />
-    </StrictMode>
+    </React.StrictMode>
   );
 }
 </script>

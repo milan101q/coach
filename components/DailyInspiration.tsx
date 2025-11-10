@@ -125,9 +125,7 @@ const DailyInspiration: React.FC = () => {
                 <span>{isCopied ? 'Copied!' : 'Copy'}</span>
             </Button>
         </div>
-        <p className="text-xs text-gray-500 mt-4">
-            New inspirations powered by Google Gemini.
-        </p>
+        
       </div>
     </section>
   );

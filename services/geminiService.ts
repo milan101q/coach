@@ -1,4 +1,5 @@
 
+
 // FIX: The GoogleGenAI client is now initialized lazily, only when needed.
 // This prevents the entire app from crashing on load if the API key is missing,
 // which was the likely cause of the blank page. The app will now load, and any
@@ -43,7 +44,8 @@ export const generateInspiration = async (): Promise<string> => {
     return text;
 
   } catch (error) {
-    console.error("Error generating inspiration:", error);
+    // Silently catch the error to prevent user-facing messages about API quota limits.
+    // The function will gracefully return a fallback quote instead.
     return getRandomFallback();
   }
 };
