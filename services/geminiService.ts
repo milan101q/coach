@@ -1,11 +1,12 @@
-import { GoogleGenAI } from "@google/genai";
 
 // FIX: The GoogleGenAI client is now initialized lazily, only when needed.
 // This prevents the entire app from crashing on load if the API key is missing,
 // which was the likely cause of the blank page. The app will now load, and any
 // potential API key errors will only occur when this specific feature is used.
-const getAiClient = () => {
+const getAiClient = async () => {
   // Aligned with guidelines to assume API_KEY is available from process.env.
+  // Dynamically import GoogleGenAI to ensure the module is only loaded when this function is called.
+  const { GoogleGenAI } = await import('@google/genai');
   return new GoogleGenAI({ apiKey: process.env.API_KEY! });
 };
 
@@ -28,7 +29,7 @@ export const getRandomFallback = (): string => {
 
 export const generateInspiration = async (): Promise<string> => {
   try {
-    const ai = getAiClient();
+    const ai = await getAiClient();
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: "Generate a short, powerful, and inspiring motivational quote (1-2 sentences) for someone seeking personal growth and life improvement. Do not use quotation marks.",
