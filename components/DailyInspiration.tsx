@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { generateInspiration } from '../services/geminiService.ts';
+import { generateInspiration, getRandomFallback } from '../services/geminiService.ts';
 import Button from './ui/Button.tsx';
 import Card from './ui/Card.tsx';
 
@@ -23,9 +23,10 @@ const CheckIcon: React.FC = () => (
 
 
 const DailyInspiration: React.FC = () => {
-  const [inspiration, setInspiration] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isFading, setIsFading] = React.useState(true); // Used for animation
+  // Initialize with a fallback quote to prevent API calls on load.
+  const [inspiration, setInspiration] = React.useState(() => getRandomFallback());
+  const [isLoading, setIsLoading] = React.useState(false); // Not loading initially.
+  const [isFading, setIsFading] = React.useState(false); // Not fading initially.
   const [canShare, setCanShare] = React.useState(false);
   const [isCopied, setIsCopied] = React.useState(false);
 
@@ -35,33 +36,21 @@ const DailyInspiration: React.FC = () => {
     }
   }, []);
 
-  const fetchInspiration = React.useCallback(async (isInitial = false) => {
-    // 1. Fade out the current quote if it's not the first load
-    if (!isInitial) {
-      setIsFading(true);
-      // Wait for fade-out transition before showing loader
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
+  const getNewInspiration = React.useCallback(async () => {
+    // 1. Fade out the current quote
+    setIsFading(true);
+    await new Promise(resolve => setTimeout(resolve, 500));
     
-    // 2. Show loader and fetch new quote
+    // 2. Show loader and fetch new quote from the API
     setIsLoading(true);
     const quote = await generateInspiration();
     setInspiration(quote);
     setIsLoading(false);
-    // 3. Fade-in will be triggered by the useEffect below
-  }, []);
-
-  // Effect for the initial load
-  React.useEffect(() => {
-    fetchInspiration(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Effect to trigger fade-in after a new quote is loaded
   React.useEffect(() => {
     if (!isLoading) {
-      // Use a short timeout to ensure the DOM has the new quote
-      // before changing opacity, which triggers the CSS transition.
       const timer = setTimeout(() => setIsFading(false), 50);
       return () => clearTimeout(timer);
     }
@@ -85,7 +74,7 @@ const DailyInspiration: React.FC = () => {
         try {
             await navigator.clipboard.writeText(`"${inspiration}"`);
             setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 2500); // Reset after 2.5 seconds
+            setTimeout(() => setIsCopied(false), 2500);
         } catch (err) {
             console.error('Failed to copy text: ', err);
         }
@@ -111,14 +100,14 @@ const DailyInspiration: React.FC = () => {
             </p>
           )}
         </Card>
-        <div className="flex justify-center items-center gap-4">
-            <Button onClick={() => fetchInspiration()} disabled={isButtonDisabled}>
-            {isButtonDisabled ? 'Generating...' : 'Get New Inspiration'}
+        <div className="flex justify-center items-center gap-4 flex-wrap">
+            <Button onClick={getNewInspiration} disabled={isButtonDisabled}>
+            {isLoading ? 'Generating...' : 'Get New Inspiration'}
             </Button>
-            {canShare && !isLoading && (
+            {canShare && (
                 <Button 
                     onClick={handleShare} 
-                    disabled={isButtonDisabled} 
+                    disabled={isButtonDisabled || !inspiration} 
                     variant="secondary"
                     aria-label="Share this quote"
                 >
@@ -126,18 +115,19 @@ const DailyInspiration: React.FC = () => {
                     <span>Share</span>
                 </Button>
             )}
-            {!isLoading && (
-                 <Button 
-                    onClick={handleCopy} 
-                    disabled={isButtonDisabled} 
-                    variant="secondary"
-                    aria-label="Copy this quote to clipboard"
-                >
-                    {isCopied ? <CheckIcon /> : <CopyIcon />}
-                    <span>{isCopied ? 'Copied!' : 'Copy'}</span>
-                </Button>
-            )}
+            <Button 
+                onClick={handleCopy} 
+                disabled={isButtonDisabled || !inspiration} 
+                variant="secondary"
+                aria-label="Copy this quote to clipboard"
+            >
+                {isCopied ? <CheckIcon /> : <CopyIcon />}
+                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+            </Button>
         </div>
+        <p className="text-xs text-gray-500 mt-4">
+            New inspirations powered by Google Gemini.
+        </p>
       </div>
     </section>
   );

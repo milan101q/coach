@@ -70,12 +70,13 @@
       }
     </script>
     <div id="root"></div>
-    <!-- 
-      FIX: Set an absolute path for the main script ('/coach/index.tsx').
-      This is the definitive fix for the 404 error when deploying to a GitHub Pages
-      subdirectory, as it tells the browser the exact location of the file,
-      bypassing issues with relative path or base tag resolution.
+    <!--
+      FIX: Corrected the script loading to use the standard Babel Standalone method.
+      Using `type="text/babel"` and a `src` attribute ensures that Babel transpiles the
+      TSX/JSX files *before* the browser's module loader tries to execute them.
+      This resolves a critical error where the browser's native module loader was
+      failing to resolve dependencies from the import map, causing the blank page.
     -->
-    <script type="text/babel" data-type="module" data-presets="react,typescript" src="/coach/index.tsx"></script>
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
   </body>
 </html>

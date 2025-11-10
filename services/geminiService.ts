@@ -9,6 +9,23 @@ const getAiClient = () => {
   return new GoogleGenAI({ apiKey: process.env.API_KEY! });
 };
 
+const fallbackQuotes = [
+  "The only way to do great work is to love what you do.",
+  "Believe you can and you're halfway there.",
+  "The future belongs to those who believe in the beauty of their dreams.",
+  "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+  "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+  "The secret of getting ahead is getting started.",
+  "Embrace challenges as opportunities for growth. Every setback is a setup for a comeback.",
+  "Your limitation—it's only your imagination.",
+  "Push yourself, because no one else is going to do it for you."
+];
+
+export const getRandomFallback = (): string => {
+  return fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+};
+
+
 export const generateInspiration = async (): Promise<string> => {
   try {
     const ai = getAiClient();
@@ -16,10 +33,16 @@ export const generateInspiration = async (): Promise<string> => {
       model: 'gemini-2.5-flash',
       contents: "Generate a short, powerful, and inspiring motivational quote (1-2 sentences) for someone seeking personal growth and life improvement. Do not use quotation marks.",
     });
+    
+    const text = response.text.trim();
+    // Handle empty response from API
+    if (!text) {
+        return getRandomFallback();
+    }
+    return text;
 
-    return response.text.trim();
   } catch (error) {
     console.error("Error generating inspiration:", error);
-    return "Embrace challenges as opportunities for growth. Every setback is a setup for a comeback.";
+    return getRandomFallback();
   }
 };
